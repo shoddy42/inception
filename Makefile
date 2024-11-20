@@ -1,3 +1,4 @@
+DIR = /home/wkonings
 ENV_FILE = ./srcs/.env
 
 # Load .env file to access DOMAIN_NAME variable
@@ -7,17 +8,17 @@ endif
 
 all: check_domain_name
 	echo "Incepting Inception"
-	@if [ -d "./data/wordpress" ]; then \
-		echo "./data/wordpress already exists"; \
+	@if [ -d "$(DIR)/data/wordpress" ]; then \
+		echo "$(DIR)/data/wordpress already exists"; \
 	else \
-		sudo mkdir -p ./data/wordpress; \
+		sudo mkdir -p $(DIR)/data/wordpress; \
 		echo "wordpress directory created successfully"; \
 	fi
 
-	@if [ -d "./data/mariadb" ]; then \
-		echo "./data/mariadb already exists"; \
+	@if [ -d "$(DIR)/data/mariadb" ]; then \
+		echo "$(DIR)/data/mariadb already exists"; \
 	else \
-		sudo mkdir -p ./data/mariadb; \
+		sudo mkdir -p $(DIR)/data/mariadb; \
 		echo "mariadb directory created successfully"; \
 	fi
 
@@ -41,26 +42,26 @@ down:
 	sudo docker compose -f ./srcs/docker-compose.yml down
 
 reset:
-	@if [ -d "./data/wordpress" ]; then \
-		sudo rm -rf ./data/wordpress && \
-		echo "successfully removed all contents from ./data/wordpress/"; \
+	if [ -d "$(DIR)/data/wordpress" ]; then \
+		sudo rm -rf $(DIR)/data/wordpress && \
+		echo "successfully removed all contents from $(DIR)/data/wordpress/"; \
 	fi;
 
-	@if [ -d "./data/mariadb" ]; then \
-		sudo rm -rf ./data/mariadb && \
-		echo "successfully removed all contents from ./data/mariadb/"; \
+	if [ -d "$(DIR)/data/mariadb" ]; then \
+		sudo rm -rf $(DIR)/data/mariadb && \
+		echo "successfully removed all contents from $(DIR)/data/mariadb/"; \
 	fi;
 	
 fclean:
 	sudo docker compose -f ./srcs/docker-compose.yml down --rmi all -v
-	@if [ -d "./data/wordpress" ]; then \
-		sudo rm -rf ./data/wordpress && \
-		echo "successfully removed all contents from ./data/wordpress/"; \
+	if [ -d "$(DIR)/data/wordpress" ]; then \
+		sudo rm -rf $(DIR)/data/wordpress && \
+		echo "successfully removed all contents from $(DIR)/data/wordpress/"; \
 	fi;
 
-	@if [ -d "./data/mariadb" ]; then \
-		sudo rm -rf ./data/mariadb && \
-		echo "successfully removed all contents from ./data/mariadb/"; \
+	if [ -d "$(DIR)/data/mariadb" ]; then \
+		sudo rm -rf $(DIR)/data/mariadb && \
+		echo "successfully removed all contents from $(DIR)/data/mariadb/"; \
 	fi;
 
 	@if grep -q "127.0.0.1 $(DOMAIN_NAME)" /etc/hosts; then \
