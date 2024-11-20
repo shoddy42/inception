@@ -13,7 +13,7 @@ services:
     networks:
       - inception
     volumes:
-      - mariadb_v:/var/lib/mysql
+      - ./data/mariadb:/var/lib/mysql
     env_file: .env
     restart: on-failure
 
@@ -23,7 +23,7 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress_v:/var/www/html
+      - ./data/wordpress:/var/www/html
     env_file: .env
     depends_on:
       - mariadb
@@ -37,23 +37,8 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress_v:/var/www/html
+      - ./data/wordpress:/var/www/html
     depends_on:
       - wordpress
       - mariadb
     restart: on-failure
-
-volumes:
-  mariadb_v:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wkonings/data/mariadb
-
-  wordpress_v:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wkonings/data/wordpress
