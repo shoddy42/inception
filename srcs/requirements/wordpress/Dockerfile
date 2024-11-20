@@ -20,7 +20,7 @@ RUN apk add --no-cache curl mariadb-client php${PHP_VERSION} wget \
     php${PHP_VERSION}-xml \
     php${PHP_VERSION}-xmlwriter \
     php${PHP_VERSION}-simplexml \
-    # php${PHP_VERSION}-pdo \
+    php${PHP_VERSION}-pdo \
     php${PHP_VERSION}-dom
 
 WORKDIR /var/www/html
