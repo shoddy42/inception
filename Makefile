@@ -1,4 +1,4 @@
-DIR = /home/wkonings
+DIR = ./srcs
 ENV_FILE = ./srcs/.env
 
 # Load .env file to access DOMAIN_NAME variable
@@ -42,24 +42,24 @@ down:
 	sudo docker compose -f ./srcs/docker-compose.yml down
 
 reset:
-	if [ -d "$(DIR)/data/wordpress" ]; then \
+	@if [ -d "$(DIR)/data/wordpress" ]; then \
 		sudo rm -rf $(DIR)/data/wordpress && \
 		echo "successfully removed all contents from $(DIR)/data/wordpress/"; \
 	fi;
 
-	if [ -d "$(DIR)/data/mariadb" ]; then \
+	@if [ -d "$(DIR)/data/mariadb" ]; then \
 		sudo rm -rf $(DIR)/data/mariadb && \
 		echo "successfully removed all contents from $(DIR)/data/mariadb/"; \
 	fi;
-	
+
 fclean:
 	sudo docker compose -f ./srcs/docker-compose.yml down --rmi all -v
-	if [ -d "$(DIR)/data/wordpress" ]; then \
+	@if [ -d "$(DIR)/data/wordpress" ]; then \
 		sudo rm -rf $(DIR)/data/wordpress && \
 		echo "successfully removed all contents from $(DIR)/data/wordpress/"; \
 	fi;
 
-	if [ -d "$(DIR)/data/mariadb" ]; then \
+	@if [ -d "$(DIR)/data/mariadb" ]; then \
 		sudo rm -rf $(DIR)/data/mariadb && \
 		echo "successfully removed all contents from $(DIR)/data/mariadb/"; \
 	fi;
@@ -68,8 +68,8 @@ fclean:
 		sudo sed -i "/127.0.0.1 $(DOMAIN_NAME)/d" /etc/hosts && \
 		echo "Removed 127.0.0.1 $(DOMAIN_NAME) from /etc/hosts"; \
 	else \
-		echo "127.0.0.1 $(DOMAIN_NAME) not found in /etc/hosts to remove. \
-		If you changed DOMAIN_NAME before running fclean, its still there."; \
+		echo "127.0.0.1 $(DOMAIN_NAME) not found in /etc/hosts to remove." \
+		"\nIf you changed DOMAIN_NAME before running fclean, its still there."; \
 	fi
 
 re: fclean all
