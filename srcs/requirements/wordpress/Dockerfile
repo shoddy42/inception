@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.19
 
 ENV PHP_VERSION 81
 
@@ -22,6 +22,8 @@ RUN apk add --no-cache curl mariadb-client php${PHP_VERSION} wget \
     php${PHP_VERSION}-simplexml \
     php${PHP_VERSION}-pdo \
     php${PHP_VERSION}-dom
+
+RUN ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php
 
 WORKDIR /var/www/html
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
