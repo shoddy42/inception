@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.18
 
 RUN apk update && apk upgrade && apk --no-cache add nginx openssl
 
