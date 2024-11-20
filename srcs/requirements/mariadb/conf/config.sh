@@ -2,7 +2,6 @@
 
 chown -R mysql:mysql /var/lib/mysql /run/mysqld
 
-#previously sleep 10
 sleep 5
 
 if [ ! -d "/var/lib/mysql/${DB_NAME}" ]; then
