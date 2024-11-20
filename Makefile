@@ -41,24 +41,24 @@ down:
 	sudo docker compose -f ./srcs/docker-compose.yml down
 
 reset:
-	if [ -d "./data/wordpress" ]; then \
+	@if [ -d "./data/wordpress" ]; then \
 		sudo rm -rf ./data/wordpress && \
 		echo "successfully removed all contents from ./data/wordpress/"; \
 	fi;
 
-	if [ -d "./data/mariadb" ]; then \
+	@if [ -d "./data/mariadb" ]; then \
 		sudo rm -rf ./data/mariadb && \
 		echo "successfully removed all contents from ./data/mariadb/"; \
 	fi;
 	
 fclean:
 	sudo docker compose -f ./srcs/docker-compose.yml down --rmi all -v
-	if [ -d "./data/wordpress" ]; then \
+	@if [ -d "./data/wordpress" ]; then \
 		sudo rm -rf ./data/wordpress && \
 		echo "successfully removed all contents from ./data/wordpress/"; \
 	fi;
 
-	if [ -d "./data/mariadb" ]; then \
+	@if [ -d "./data/mariadb" ]; then \
 		sudo rm -rf ./data/mariadb && \
 		echo "successfully removed all contents from ./data/mariadb/"; \
 	fi;
