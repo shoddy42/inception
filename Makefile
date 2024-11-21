@@ -1,4 +1,4 @@
-DIR = ./srcs
+LOGIN = wkonings
 ENV_FILE = ./srcs/.env
 
 # Load .env file to access DOMAIN_NAME variable
@@ -8,17 +8,17 @@ endif
 
 all: check_domain_name
 	echo "Incepting Inception"
-	@if [ -d "$(DIR)/data/wordpress" ]; then \
-		echo "$(DIR)/data/wordpress already exists"; \
+	@if [ -d "/home/$(LOGIN)/data/wordpress" ]; then \
+		echo "/home/$(LOGIN)/data/wordpress already exists"; \
 	else \
-		sudo mkdir -p $(DIR)/data/wordpress; \
+		sudo mkdir -p /home/$(LOGIN)/data/wordpress; \
 		echo "wordpress directory created successfully"; \
 	fi
 
-	@if [ -d "$(DIR)/data/mariadb" ]; then \
-		echo "$(DIR)/data/mariadb already exists"; \
+	@if [ -d "/home/$(LOGIN)/data/mariadb" ]; then \
+		echo "/home/$(LOGIN)/data/mariadb already exists"; \
 	else \
-		sudo mkdir -p $(DIR)/data/mariadb; \
+		sudo mkdir -p /home/$(LOGIN)/data/mariadb; \
 		echo "mariadb directory created successfully"; \
 	fi
 
@@ -42,26 +42,26 @@ down:
 	sudo docker compose -f ./srcs/docker-compose.yml down
 
 reset:
-	@if [ -d "$(DIR)/data/wordpress" ]; then \
-		sudo rm -rf $(DIR)/data/wordpress && \
-		echo "successfully removed all contents from $(DIR)/data/wordpress/"; \
+	@if [ -d "/home/$(LOGIN)/data/wordpress" ]; then \
+		sudo rm -rf /home/$(LOGIN)/data/wordpress && \
+		echo "successfully removed all contents from /home/$(LOGIN)/data/wordpress/"; \
 	fi;
 
-	@if [ -d "$(DIR)/data/mariadb" ]; then \
-		sudo rm -rf $(DIR)/data/mariadb && \
-		echo "successfully removed all contents from $(DIR)/data/mariadb/"; \
+	@if [ -d "/home/$(LOGIN)/data/mariadb" ]; then \
+		sudo rm -rf /home/$(LOGIN)/data/mariadb && \
+		echo "successfully removed all contents from /home/$(LOGIN)/data/mariadb/"; \
 	fi;
 
 fclean:
 	sudo docker compose -f ./srcs/docker-compose.yml down --rmi all -v
-	@if [ -d "$(DIR)/data/wordpress" ]; then \
-		sudo rm -rf $(DIR)/data/wordpress && \
-		echo "successfully removed all contents from $(DIR)/data/wordpress/"; \
+	@if [ -d "/home/$(LOGIN)/data/wordpress" ]; then \
+		sudo rm -rf /home/$(LOGIN)/data/wordpress && \
+		echo "successfully removed all contents from /home/$(LOGIN)/data/wordpress/"; \
 	fi;
 
-	@if [ -d "$(DIR)/data/mariadb" ]; then \
-		sudo rm -rf $(DIR)/data/mariadb && \
-		echo "successfully removed all contents from $(DIR)/data/mariadb/"; \
+	@if [ -d "/home/$(LOGIN)/data/mariadb" ]; then \
+		sudo rm -rf /home/$(LOGIN)/data/mariadb && \
+		echo "successfully removed all contents from /home/$(LOGIN)/data/mariadb/"; \
 	fi;
 
 	@if grep -q "127.0.0.1 $(DOMAIN_NAME)" /etc/hosts; then \
@@ -80,10 +80,9 @@ ls:
 
 env:
 	@echo "Creating .env file..."
-	@echo "Make sure to change AT LEAST all 'default' values, for security reasons"
-	@echo "#MariaDB" > $(ENV_FILE)
+	@echo "Make sure to change AT LEAST all 'default' values, for security reasons" > $(ENV_FILE)
+	@echo "#MariaDB" >> $(ENV_FILE)
 	@echo "DB_NAME=wordpress" >> $(ENV_FILE)
-	@echo "DB_HOST=mariadb" >> $(ENV_FILE)
 	@echo "DB_USER=default" >> $(ENV_FILE)
 	@echo "DB_PASS=default" >> $(ENV_FILE)
 	@echo "DB_ROOT_PASS=default" >> $(ENV_FILE)
