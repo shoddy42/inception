@@ -29,7 +29,7 @@ all: check_domain_name
 		echo "$(DOMAIN_NAME) is already in /etc/hosts"; \
 	fi; \
 
-	sudo docker compose -f ./srcs/docker-compose.yml up -d --build
+	sudo docker compose -f ./srcs/docker-compose.yml up --build
 
 check_domain_name:
 	@if [ -z "$(DOMAIN_NAME)" ]; then \
@@ -82,7 +82,7 @@ env:
 	@echo "Creating .env file..."
 	@echo "Make sure to change AT LEAST all 'default' values, for security reasons"
 	@echo "#MariaDB" > $(ENV_FILE)
-	@echo "DB_NAME=mariadb" >> $(ENV_FILE)
+	@echo "DB_NAME=wordpress" >> $(ENV_FILE)
 	@echo "DB_HOST=mariadb" >> $(ENV_FILE)
 	@echo "DB_USER=default" >> $(ENV_FILE)
 	@echo "DB_PASS=default" >> $(ENV_FILE)
@@ -93,14 +93,14 @@ env:
 	@echo "DOMAIN_NAME=wkonings.42.fr" >> $(ENV_FILE)
 	@echo "" >> $(ENV_FILE)
 	@echo "#WordPress Admin" >> $(ENV_FILE)
-	@echo "WP_ADMIN_USER=default_please_change" >> $(ENV_FILE)
-	@echo "WP_ADMIN_PASS=default_please_change" >> $(ENV_FILE)
-	@echo "WP_ADMIN_EMAIL=default_please_change" >> $(ENV_FILE)
+	@echo "WP_ADMIN_USER=default" >> $(ENV_FILE)
+	@echo "WP_ADMIN_PASS=default" >> $(ENV_FILE)
+	@echo "WP_ADMIN_EMAIL=default@email.com" >> $(ENV_FILE)
 	@echo "" >> $(ENV_FILE)
 	@echo "#WordPress User" >> $(ENV_FILE)
 	@echo "WP_USER_NAME=default_user" >> $(ENV_FILE)
-	@echo "WP_USER_PASS=default_user" >> $(ENV_FILE)
-	@echo "WP_USER_EMAIL=default_user" >> $(ENV_FILE)
+	@echo "WP_USER_PASS=default" >> $(ENV_FILE)
+	@echo "WP_USER_EMAIL=defaultuser@email.com" >> $(ENV_FILE)
 	@echo "WP_USER_ROLE=editor" >> $(ENV_FILE)
 	@echo ".env file created successfully! Remember to set the variables..."
 
