@@ -1,4 +1,6 @@
 #!/bin/sh
+DB_HOST=mariadb
+
 # set listening port for php fpm
 until mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -e '' 2>/dev/null;do
 	echo "waiting for mariadb..."

@@ -10,8 +10,6 @@ services:
       - inception
     volumes:
       - mariadb_v:/var/lib/mysql
-    environment:
-      DB_HOST: mariadb
     env_file: .env
     restart: on-failure
 
