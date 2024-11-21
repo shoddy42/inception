@@ -1,5 +1,5 @@
 #!/bin/sh
-DB_HOST=mariadb
+DB_HOST=mariadb #ensure this is the same as the mariadb container_name
 
 # set listening port for php fpm
 until mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -e '' 2>/dev/null;do
