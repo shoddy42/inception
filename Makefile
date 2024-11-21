@@ -79,7 +79,7 @@ ls:
 	sudo docker ps
 
 env:
-	@echo "Creating .env file..."
+	@echo "Creating .env file in ./srcs/.env"
 	@echo "#Make sure to change AT LEAST all 'default' values, for security reasons" > $(ENV_FILE)
 	@echo "#MariaDB" >> $(ENV_FILE)
 	@echo "DB_NAME=wordpress" >> $(ENV_FILE)
