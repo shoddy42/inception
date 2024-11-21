@@ -80,7 +80,7 @@ ls:
 
 env:
 	@echo "Creating .env file..."
-	@echo "Make sure to change AT LEAST all 'default' values, for security reasons" > $(ENV_FILE)
+	@echo "#Make sure to change AT LEAST all 'default' values, for security reasons" > $(ENV_FILE)
 	@echo "#MariaDB" >> $(ENV_FILE)
 	@echo "DB_NAME=wordpress" >> $(ENV_FILE)
 	@echo "DB_USER=default" >> $(ENV_FILE)
