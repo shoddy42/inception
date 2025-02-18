@@ -13,7 +13,7 @@ RUN apk add --no-cache curl mariadb-client php${PHP_VERSION} wget \
     php${PHP_VERSION}-iconv \
     php${PHP_VERSION}-cli \
     php${PHP_VERSION}-curl \
-    php${PHP_VERSION}-mysqli \ 
+    php${PHP_VERSION}-mysqli \
     php${PHP_VERSION}-mbstring \
     php${PHP_VERSION}-tokenizer \
     php${PHP_VERSION}-fileinfo \
@@ -29,7 +29,6 @@ WORKDIR /var/www/html
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
-RUN wp core download --allow-root --path=/var/www/html
 
 COPY tools/setup_wordpress.sh /setup_wordpress.sh
 RUN chmod +x /setup_wordpress.sh;

@@ -1,14 +1,19 @@
 #!/bin/sh
 DB_HOST=mariadb #ensure this is the same as the mariadb container_name
 
-# set listening port for php fpm
+# download WordPress
+php -d memory_limit=512M /usr/local/bin/wp core download --allow-root --path=/var/www/html
+
+# wait until mariadb is properly launched
 until mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -e '' 2>/dev/null;do
 	echo "waiting for mariadb..."
 	sleep 1
 done
 
+# set listening port for php fpm
 sed -i "s/listen = 127.0.0.1:9000/listen = 9000/g" /etc/php81/php-fpm.d/www.conf
 
+# configure wordpress
 wp config create --allow-root \
 	--dbname=${DB_NAME} \
 	--dbuser=${DB_USER} \

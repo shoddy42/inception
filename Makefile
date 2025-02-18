@@ -89,7 +89,7 @@ env:
 	@echo "" >> $(ENV_FILE)
 	@echo "#WordPress" >> $(ENV_FILE)
 	@echo "WP_TITLE=Inception_42" >> $(ENV_FILE)
-	@echo "DOMAIN_NAME=wkonings.42.fr" >> $(ENV_FILE)
+	@echo "DOMAIN_NAME=$(LOGIN).42.fr" >> $(ENV_FILE)
 	@echo "" >> $(ENV_FILE)
 	@echo "#WordPress Admin" >> $(ENV_FILE)
 	@echo "WP_ADMIN_USER=default" >> $(ENV_FILE)
